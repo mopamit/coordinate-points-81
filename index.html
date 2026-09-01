@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#087f78">
+  <title>סימון נקודות במערכת צירים</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="logo-wrap">
+        <img src="./logo-prismind.png" alt="Prismind">
+      </div>
+      <div class="title-block">
+        <h1>סימון נקודות במערכת צירים</h1>
+        <span>תרגול אינטראקטיבי</span>
+      </div>
+      <button id="resetBtn" class="restart-btn" type="button">↻ התחלה מחדש</button>
+    </header>
+
+    <div class="progress-line" aria-hidden="true">
+      <span id="topProgress"></span>
+    </div>
+
+    <section class="workspace">
+      <aside class="points-panel">
+        <div class="panel-heading">
+          <strong>הנקודות</strong>
+          <span>בחרו נקודה ולאחר מכן סמנו אותה על מערכת הצירים</span>
+        </div>
+
+        <div class="progress-chip" id="progress">0 מתוך 8</div>
+        <div class="point-list" id="pointList"></div>
+
+        <div class="side-hint">
+          <span class="hint-icon">⌖</span>
+          <div>
+            <strong>איך עובדים?</strong>
+            <small>קודם בוחרים נקודה מהרשימה, ורק אחר כך מסמנים אותה על מערכת הצירים.</small>
+          </div>
+        </div>
+      </aside>
+
+      <section class="canvas-panel">
+        <div class="board-card">
+          <div class="graph-top">
+            <div class="task-line">סמנו את הנקודה שנבחרה על מערכת הצירים</div>
+            <div class="selected-badge" id="selectedBadge">עדיין לא נבחרה נקודה</div>
+          </div>
+          <div class="graph-wrap">
+            <svg id="graph" viewBox="0 0 760 680" role="img" aria-label="מערכת צירים אינטראקטיבית"></svg>
+          </div>
+        </div>
+        <div id="message" class="message" aria-live="polite">בחרו נקודה מהרשימה כדי להתחיל.</div>
+      </section>
+
+      <aside class="task-panel">
+        <div class="task-kicker">המשימה</div>
+        <h2>נמקם 8 נקודות</h2>
+        <p>בחרו בכל פעם נקודה אחת מהרשימה. לאחר הבחירה לחצו על נקודת החיתוך המתאימה ברשת.</p>
+
+        <div class="instruction-card">
+          <span>1</span>
+          <div><strong>בחרו נקודה</strong><small>לדוגמה A(2,4)</small></div>
+        </div>
+        <div class="instruction-card">
+          <span>2</span>
+          <div><strong>סמנו על הרשת</strong><small>לחצו במקום שבו x ו־y נפגשים</small></div>
+        </div>
+        <div class="instruction-card">
+          <span>3</span>
+          <div><strong>קבלו משוב מיד</strong><small>✓ נכון או ✕ נסו שוב</small></div>
+        </div>
+
+        <div class="task-note">
+          נקודה שמוקמה נכון נשארת על מערכת הצירים ומסומנת כנקודה שהושלמה.
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
