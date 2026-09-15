@@ -32,6 +32,10 @@
     const state={};
     points.forEach(p=>state[p.id]={status:'idle', placed:false});
 
+    // מבודד ביטויים מתמטיים/לטיניים בתוך משפט עברי, בלי לפצל את המשפט
+    // לכמה פריטי flex (מה שגרם בעבר לשינוי סדר המילים).
+    const ltr = value => `\u2066${value}\u2069`;
+
     function svgEl(tag, attrs={}, text=''){
       const el=document.createElementNS(ns,tag);
       Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));
@@ -159,7 +163,7 @@
         state[p.id].status='correct';
         state[p.id].placed=true;
         message.className='message ok';
-        message.textContent=`נכון! הנקודה ${p.id} נמצאת ב־(${p.x},${p.y}).`;
+        message.textContent=`נכון! נקודה ${ltr(`(${p.x},${p.y})`)} נמצאת ב־${ltr(p.id)}.`;
         selected=null;
         selectedBadge.textContent='בחרו את הנקודה הבאה';
         drawGraph();
@@ -168,7 +172,7 @@
       }else{
         state[p.id].status='wrong';
         message.className='message bad';
-        message.textContent=`לא מדויק. סימנתם (${gx},${gy}). נסו שוב את הנקודה ${p.id}.`;
+        message.textContent=`לא מדויק. סימנתם ${ltr(`(${gx},${gy})`)}. נסו שוב את הנקודה ${ltr(p.id)}.`;
         renderList();
       }
     }
