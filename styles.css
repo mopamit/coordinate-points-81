@@ -239,6 +239,7 @@ button{font:inherit;cursor:pointer}
 .tick-text{fill:#60777f;font-size:13px;font-weight:700}
 .axis-label{fill:#18353d;font-size:18px;font-weight:800}
 .plot-dot{fill:var(--teal);stroke:#fff;stroke-width:3}
+.wrong-plot-dot{fill:#d64545;stroke:#fff;stroke-width:3}
 .plot-label{
   fill:var(--teal);
   font-size:18px;

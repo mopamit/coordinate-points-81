@@ -35,6 +35,7 @@
   const resetBtn = document.getElementById('resetBtn');
 
   let selected = null;
+  let wrongPlacement = null; // המיקום השגוי האחרון נשאר מסומן באדום עד לסימון נכון
   const state = {};
   points.forEach(p => {
     state[p.id] = { status: 'idle', placed: false };
@@ -163,6 +164,16 @@
         class: 'plot-label'
       }, p.id));
     });
+
+    // מיקום שגוי נשאר נראה כנקודה אדומה עד שהתלמיד מסמן מיקום נכון.
+    if (wrongPlacement) {
+      graph.appendChild(svgEl('circle', {
+        cx: sx(wrongPlacement.x),
+        cy: sy(wrongPlacement.y),
+        r: 7,
+        class: 'wrong-plot-dot'
+      }));
+    }
   }
 
   function renderList() {
@@ -272,6 +283,7 @@
     if (!p) return;
 
     if (gx === p.x && gy === p.y) {
+      wrongPlacement = null;
       state[p.id].status = 'correct';
       state[p.id].placed = true;
       message.className = 'message ok';
@@ -282,9 +294,11 @@
       renderList();
       finishCheck();
     } else {
+      wrongPlacement = { x: gx, y: gy };
       state[p.id].status = 'wrong';
       message.className = 'message bad';
       message.textContent = `לא מדויק. סימנתם ${ltr(`(${gx},${gy})`)}. נסו שוב את הנקודה ${ltr(p.id)}.`;
+      drawGraph();
       renderList();
     }
   }
@@ -293,6 +307,7 @@
 
   resetBtn.addEventListener('click', () => {
     selected = null;
+    wrongPlacement = null;
 
     points.forEach(p => {
       state[p.id] = { status: 'idle', placed: false };
